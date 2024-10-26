@@ -11,47 +11,47 @@ namespace ApiEmpresa.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientesController : ControllerBase
+    public class ProveedoresController : ControllerBase
     {
         private readonly Conexiones _context;
 
-        public ClientesController(Conexiones context)
+        public ProveedoresController(Conexiones context)
         {
             _context = context;
         }
 
-        // GET: api/Clientes
+        // GET: api/Proveedores
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Clientes>>> GetClientes()
+        public async Task<ActionResult<IEnumerable<Proveedores>>> GetProveedores()
         {
-            return await _context.Clientes.ToListAsync();
+            return await _context.Proveedores.ToListAsync();
         }
 
-        // GET: api/Clientes/5
+        // GET: api/Proveedores/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Clientes>> GetClientes(int id)
+        public async Task<ActionResult<Proveedores>> GetProveedores(int id)
         {
-            var clientes = await _context.Clientes.FindAsync(id);
+            var proveedores = await _context.Proveedores.FindAsync(id);
 
-            if (clientes == null)
+            if (proveedores == null)
             {
                 return NotFound();
             }
 
-            return clientes;
+            return proveedores;
         }
 
-        // PUT: api/Clientes/5
+        // PUT: api/Proveedores/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutClientes(int id, Clientes clientes)
+        public async Task<IActionResult> PutProveedores(int id, Proveedores proveedores)
         {
-            if (id != clientes.Id_cliente)
+            if (id != proveedores.Id_proveedor)
             {
                 return BadRequest();
             }
 
-            _context.Entry(clientes).State = EntityState.Modified;
+            _context.Entry(proveedores).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace ApiEmpresa.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClientesExists(id))
+                if (!ProveedoresExists(id))
                 {
                     return NotFound();
                 }
@@ -72,36 +72,36 @@ namespace ApiEmpresa.Controllers
             return NoContent();
         }
 
-        // POST: api/Clientes
+        // POST: api/Proveedores
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Clientes>> PostClientes(Clientes clientes)
+        public async Task<ActionResult<Proveedores>> PostProveedores(Proveedores proveedores)
         {
-            _context.Clientes.Add(clientes);
+            _context.Proveedores.Add(proveedores);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetClientes", new { id = clientes.Id_cliente }, clientes);
+            return CreatedAtAction("GetProveedores", new { id = proveedores.Id_proveedor }, proveedores);
         }
 
-        // DELETE: api/Clientes/5
+        // DELETE: api/Proveedores/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteClientes(int id)
+        public async Task<IActionResult> DeleteProveedores(int id)
         {
-            var clientes = await _context.Clientes.FindAsync(id);
-            if (clientes == null)
+            var proveedores = await _context.Proveedores.FindAsync(id);
+            if (proveedores == null)
             {
                 return NotFound();
             }
 
-            _context.Clientes.Remove(clientes);
+            _context.Proveedores.Remove(proveedores);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ClientesExists(int id)
+        private bool ProveedoresExists(int id)
         {
-            return _context.Clientes.Any(e => e.Id_cliente == id);
+            return _context.Proveedores.Any(e => e.Id_proveedor == id);
         }
     }
 }
